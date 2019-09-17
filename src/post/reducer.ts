@@ -1,11 +1,23 @@
-import { PostActions } from './actions';
+import { PostActions, PostActionTypes } from './actions';
+import { PostModel } from '@pyxismedia/lib-model';
+import { Action } from '../types';
 
-const initialState = {};
+export interface PostState {
+  posts: PostModel[];
+  post: PostModel;
+}
 
-export function post(state = initialState, action: any) {
-  switch(action.type) {
+const initialState = {
+  posts: [],
+  post: null,
+};
+
+export function post(state: PostState = initialState, action: Action<PostActions, PostActionTypes>): PostState {
+  switch (action.type) {
     case PostActions.DELIVER_POSTS:
       return { ...state, posts: action.payload };
+    case PostActions.DELIVER_POST:
+      return { ...state, post: action.payload };
     case PostActions.REQUEST_POSTS:
     case PostActions.CREATE_POST:
     default:
