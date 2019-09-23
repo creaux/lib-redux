@@ -1,8 +1,7 @@
 import test from 'ava';
-import { configureStore } from './store';
-import { requestPostsAction, createPostAction } from './post/actions';
+import { configureStore } from '../store';
+import { requestPostsAction, createPostAction } from './actions';
 import { PostStateEnum, CreatePostModel, SectionSchema } from '@pyxismedia/lib-model';
-import postsJson from '@pyxismedia/lib-model/build/post/post.data.json';
 import postsEnJson from '@pyxismedia/lib-model/build/post/post.en-mock.json';
 import { Types } from 'mongoose';
 import { PostModel } from '@pyxismedia/lib-model';

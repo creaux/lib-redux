@@ -23,11 +23,9 @@
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
     "@commitlint/prompt-cli": "^8.0.0",
-    "@types/dotenv": "^6.1.1",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^2.2.0",
     "ava": "^2.3.0",
-    "dotenv": "^8.1.0",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
@@ -64,7 +62,9 @@
     "npm": "6.4.1"
   },
   "dependencies": {
-    "@pyxismedia/lib-model": "^1.0.16",
+    "@pyxismedia/lib-model": "^1.0.17",
+    "@types/dotenv-flow": "^3.0.0",
+    "dotenv-flow": "^3.1.0",
     "es6-promise": "^4.2.8",
     "isomorphic-fetch": "^2.2.1",
     "redux": "^4.0.4",

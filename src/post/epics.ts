@@ -13,15 +13,21 @@ import { mergeMap, map } from 'rxjs/operators';
 import { PostModel } from '@pyxismedia/lib-model';
 import { Observable } from 'rxjs';
 import { CreatePostActionType, DeliverPostActionType } from './actions';
+import { API_POST } from '../constants';
 
 export const requestPostsEpic = (action$: Observable<RequestPostActionType>): Observable<DeliverPostsActionType> =>
   action$.pipe(
     ofType(PostActions.REQUEST_POSTS),
     mergeMap(
-      async (): Promise<PostModel[]> =>
-        await fetch('http://srv-nest.pyxis.media/post').then((res: Response): Promise<PostModel[]> => res.json()),
+      async (): Promise<PostModel[]> => {
+        return await fetch(API_POST).then((res: Response): Promise<PostModel[]> => res.json());
+      },
     ),
-    map((posts: PostModel[]): DeliverPostsActionType => deliverPostsAction(posts)),
+    map(
+      (posts: PostModel[]): DeliverPostsActionType => {
+        return deliverPostsAction(posts);
+      },
+    ),
   );
 
 export const createPostEpic = (action$: Observable<CreatePostActionType>): Observable<DeliverPostActionType> =>
@@ -29,7 +35,7 @@ export const createPostEpic = (action$: Observable<CreatePostActionType>): Obser
     ofType(PostActions.CREATE_POST),
     mergeMap(
       async (): Promise<PostModel> =>
-        await fetch('http://srv-nest.pyxis.media/post', {
+        await fetch(API_POST, {
           method: 'post',
           headers: {
             Accept: 'application/json',
