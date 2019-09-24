@@ -1,5 +1,8 @@
 import babel from 'rollup-plugin-babel';
-import { eslint } from 'rollup-plugin-eslint';
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
+
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 export default {
   input: './src/index.ts',
@@ -8,10 +11,11 @@ export default {
     format: 'cjs',
   },
   plugins: [
+    resolve({ extensions }),
+    commonjs(),
     babel({
-      exclude: 'node_modules/**',
-      extensions: ['.ts', '.js'],
+      include: 'src/**/*',
+      extensions,
     }),
-    eslint(),
   ],
 };

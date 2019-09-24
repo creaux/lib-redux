@@ -11,7 +11,7 @@
   "scripts": {
     "build": "rollup -c",
     "commit": "commit",
-    "lint": "eslint -c .eslintrc './src/**/*.ts'",
+    "lint": "eslint -c .eslintrc.json './src/**/*.ts'",
     "release": "semantic-release",
     "test": "ava",
     "prettier": "prettier --config .prettierrc --write './src/**/*.ts'",
@@ -48,7 +48,9 @@
     "prettier": "^1.18.2",
     "rollup": "^1.21.2",
     "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "semantic-release": "^15.13.17",
     "ts-node": "^8.3.0",
     "typescript": "^3.6.3"
