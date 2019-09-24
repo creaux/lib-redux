@@ -20,6 +20,3 @@ jobs:
         skip_cleanup: true
         script:
           - npm run release
-
-#after_success:
-#  - npm run deploy

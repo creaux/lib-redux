@@ -4,7 +4,7 @@
   "license": "ISC",
   "author": "",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "build/bundle.js",
   "files": [
     "build"
   ],

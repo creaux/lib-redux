@@ -1,13 +1,11 @@
 import test from 'ava';
 import { configureStore } from '../store';
 import { requestPostsAction, createPostAction } from './actions';
-import { PostStateEnum, CreatePostModel, SectionSchema } from '@pyxismedia/lib-model';
+import { PostStateEnum, CreatePostModel } from '@pyxismedia/lib-model';
 import postsEnJson from '@pyxismedia/lib-model/build/post/post.en-mock.json';
 import { Types } from 'mongoose';
-import { PostModel } from '@pyxismedia/lib-model';
 
 const store = configureStore();
-let posts: PostModel[];
 
 test.before(() => {
   store.dispatch(
