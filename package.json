@@ -1,19 +1,32 @@
 {
   "name": "@pyxismedia/lib-redux",
-  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "ava",
-    "build": "rollup -c",
-    "lint": "eslint -c .eslintrc './src/**/*.ts'",
-    "prettier": "prettier --config .prettierrc --write './src/**/*.ts'",
-    "prettier:lint": "prettier --config .prettierrc --check './src/**/*.ts'",
-    "commit": "commit",
-    "release": "semantic-release"
-  },
-  "author": "",
   "license": "ISC",
+  "author": "",
+  "version": "0.0.1",
+  "main": "index.js",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "commit": "commit",
+    "lint": "eslint -c .eslintrc './src/**/*.ts'",
+    "release": "semantic-release",
+    "test": "ava",
+    "prettier": "prettier --config .prettierrc --write './src/**/*.ts'",
+    "prettier:lint": "prettier --config .prettierrc --check './src/**/*.ts'"
+  },
+  "dependencies": {
+    "@pyxismedia/lib-model": "1.0.18",
+    "@types/dotenv-flow": "^3.0.0",
+    "dotenv-flow": "^3.1.0",
+    "es6-promise": "^4.2.8",
+    "isomorphic-fetch": "^2.2.1",
+    "redux": "^4.0.4",
+    "redux-observable": "^1.1.0",
+    "rxjs": "^6.5.3"
+  },
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
@@ -40,14 +53,10 @@
     "ts-node": "^8.3.0",
     "typescript": "^3.6.3"
   },
-  "files": [
-    "build"
-  ],
-  "lint-staged": {
-    "{src}/**/*.ts*": [
-      "npm run prettier",
-      "git add"
-    ]
+  "engines": {
+    "node": "10.15.3",
+    "npm": "6.4.1",
+    "yarn": "1.17.3"
   },
   "husky": {
     "hooks": {
@@ -56,19 +65,10 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
-  "engines": {
-    "node": "10.15.3",
-    "yarn": "1.17.3",
-    "npm": "6.4.1"
-  },
-  "dependencies": {
-    "@pyxismedia/lib-model": "^1.0.17",
-    "@types/dotenv-flow": "^3.0.0",
-    "dotenv-flow": "^3.1.0",
-    "es6-promise": "^4.2.8",
-    "isomorphic-fetch": "^2.2.1",
-    "redux": "^4.0.4",
-    "redux-observable": "^1.1.0",
-    "rxjs": "^6.5.3"
+  "lint-staged": {
+    "{src}/**/*.ts*": [
+      "npm run prettier",
+      "git add"
+    ]
   }
 }

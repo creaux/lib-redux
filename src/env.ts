@@ -1,4 +1,5 @@
 require('dotenv-flow').config({
+  // eslint-disable-next-line @typescript-eslint/camelcase
   node_env: process.env.NODE_ENV === 'test' || !process.env.NODE_ENV ? 'development' : process.env.NODE_ENV,
 });
 
