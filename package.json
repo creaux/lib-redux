@@ -67,7 +67,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "CI=true npm test && npm run build",
+      "pre-push": "CI=true API_HOSTNAME=http://srv-nest.pyxis.media npm test && npm run build",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
