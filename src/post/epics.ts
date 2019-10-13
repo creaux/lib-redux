@@ -1,47 +1,37 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-import { ofType } from 'redux-observable';
-import {
-  PostActions,
-  deliverPostsAction,
-  deliverPostAction,
-  RequestPostActionType,
-  DeliverPostsActionType,
-} from './actions';
-import { mergeMap, map } from 'rxjs/operators';
-import { PostModel } from '@pyxismedia/lib-model';
-import { Observable } from 'rxjs';
-import { CreatePostActionType, DeliverPostActionType } from './actions';
+import { PostModel, CreatePostModel } from '@pyxismedia/lib-model';
+import { filter, map, mergeMap, catchError } from 'rxjs/operators';
+import { isActionOf, PayloadAction } from 'typesafe-actions';
 import { API_POST } from '../constants';
+import { createPostAction, deliverPostAction, deliverPostsAction, requestPostsAction, PostActions } from './actions';
+import { createToast } from '../toast/actions';
+import { of } from 'rxjs';
+import { RootEpic } from '../epics';
 
-export const requestPostsEpic = (action$: Observable<RequestPostActionType>): Observable<DeliverPostsActionType> =>
+export const requestPostsEpic: RootEpic = (action$, _$, { crud }) =>
   action$.pipe(
-    ofType(PostActions.REQUEST_POSTS),
+    filter(isActionOf(requestPostsAction)),
     mergeMap(
-      async (): Promise<PostModel[]> => {
-        return await fetch(API_POST).then((res: Response): Promise<PostModel[]> => res.json());
+      (data): Promise<PostModel[]> => {
+        const url = `${API_POST}?skip=${data.payload.skip}`;
+        return crud.get(url);
       },
     ),
-    map(
-      (posts: PostModel[]): DeliverPostsActionType => {
-        return deliverPostsAction(posts);
-      },
-    ),
+    map((posts: PostModel[]) => {
+      return deliverPostsAction(posts);
+    }),
   );
 
-export const createPostEpic = (action$: Observable<CreatePostActionType>): Observable<DeliverPostActionType> =>
+export const createPostEpic: RootEpic = (action$, _$, { crud }) =>
   action$.pipe(
-    ofType(PostActions.CREATE_POST),
+    filter(isActionOf(createPostAction)),
     mergeMap(
-      async (): Promise<PostModel> =>
-        await fetch(API_POST, {
-          method: 'post',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-        }).then((res: Response): Promise<PostModel> => res.json()),
+      ({ payload }: PayloadAction<PostActions.CREATE_POST, CreatePostModel>): Promise<PostModel> => {
+        return crud.post(API_POST, JSON.stringify(payload));
+      },
     ),
-    map((post: PostModel): DeliverPostActionType => deliverPostAction(post)),
+    map((post: PostModel) => deliverPostAction(post)),
+    catchError(error => of(createToast(error))),
   );
