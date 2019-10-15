@@ -1,24 +1,49 @@
-import { PostActions, PostActionTypes } from './actions';
+import * as postActions from './actions';
 import { PostModel } from '@pyxismedia/lib-model';
+import { getType, ActionType } from 'typesafe-actions';
+
+export type PostActionTypes = ActionType<typeof postActions>;
+
+interface PostsState {
+  collection: PostModel[];
+  skip: number;
+}
 
 export interface PostState {
-  posts?: PostModel[];
+  posts: PostsState;
   post?: PostModel;
 }
 
 const initialState = {
-  posts: undefined,
+  posts: {
+    collection: [],
+    skip: 0,
+  },
   post: undefined,
 };
 
-export function post(state: PostState = initialState, action: PostActionTypes): PostState {
+function posts(state: PostsState, action: PostActionTypes): PostsState {
   switch (action.type) {
-    case PostActions.DELIVER_POSTS:
-      return { ...state, posts: action.payload };
-    case PostActions.DELIVER_POST:
-      return { ...state, post: action.payload };
-    case PostActions.REQUEST_POSTS:
-    case PostActions.CREATE_POST:
+    case getType(postActions.requestPostsAction):
+      return { ...state, ...action.payload };
+    case getType(postActions.deliverPostsAction):
+      return { ...state, collection: action.payload as PostModel[] };
+    default:
+      return { ...state };
+  }
+}
+
+export function postReducer(state: PostState = initialState, action: PostActionTypes): PostState {
+  switch (action.type) {
+    case getType(postActions.deliverPostsAction):
+      return { ...state, posts: posts(state.posts, action) };
+    case getType(postActions.deliverPostAction):
+      return { ...state, post: action.payload as PostModel };
+    case getType(postActions.requestPostsAction):
+      return { ...state, posts: posts(state.posts, action) };
+    case getType(postActions.resetPostAction):
+      return { ...initialState };
+    case getType(postActions.createPostAction):
     default:
       return { ...state };
   }

@@ -13,19 +13,21 @@
     "commit": "commit",
     "lint": "eslint -c .eslintrc.json './src/**/*.ts'",
     "release": "semantic-release",
-    "test": "ava",
+    "test": "ava --verbose",
+    "test:watch": "ava --watch --verbose",
     "prettier": "prettier --config .prettierrc --write './src/**/*.ts'",
-    "prettier:lint": "prettier --config .prettierrc --check './src/**/*.ts'"
+    "prettier:lint": "prettier --config .prettierrc --check './src/**/*.ts'",
+    "mongoimport": "eval $(egrep -v '^#' .env.development | xargs) npm explore @pyxismedia/lib-model -- npm run mongoimport"
   },
   "dependencies": {
     "@pyxismedia/lib-model": "1.0.19",
     "@types/dotenv-flow": "^3.0.0",
     "dotenv-flow": "^3.1.0",
     "es6-promise": "^4.2.8",
-    "isomorphic-fetch": "^2.2.1",
     "redux": "^4.0.4",
     "redux-observable": "^1.1.0",
-    "rxjs": "^6.5.3"
+    "rxjs": "^6.5.3",
+    "typesafe-actions": "^4.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
@@ -37,6 +39,8 @@
     "@commitlint/config-conventional": "^8.0.0",
     "@commitlint/prompt-cli": "^8.0.0",
     "@typescript-eslint/eslint-plugin": "^2.3.3",
+    "@types/dotenv-flow": "^3.0.0",
+    "@types/isomorphic-fetch": "^0.0.35",
     "@typescript-eslint/parser": "^2.2.0",
     "ava": "^2.3.0",
     "eslint": "^6.3.0",
@@ -45,6 +49,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "husky": "3.0.9",
     "lint-staged": "9.4.2",
+    "lodash": "^4.17.15",
     "prettier": "^1.18.2",
     "rollup": "^1.21.2",
     "rollup-plugin-babel": "^4.3.3",
@@ -63,7 +68,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "CI=true npm test && npm run build",
+      "pre-push": "CI=true API_HOSTNAME=http://srv-nest.pyxis.media npm test && npm run build",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },

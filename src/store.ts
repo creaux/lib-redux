@@ -1,15 +1,13 @@
-import { createStore, applyMiddleware, Store } from 'redux';
-import { rootReducer, ActionTypes } from './reducers';
+import { createStore, Store } from 'redux';
+import { reducers, RootState } from './reducers';
 import { epicMiddleware } from './middlewares';
 import { rootEpic } from './epics';
-import { PostState } from './post/reducer';
+import { enhancers } from './enhancers';
+import { ActionTypes } from './actions';
 
-export interface State {
-  post: PostState;
-}
-
-export const configureStore = (): Store<State, ActionTypes> & { dispatch: unknown } => {
-  const store = createStore(rootReducer, applyMiddleware(epicMiddleware));
+export const configureStore = (initialState?: RootState): Store<RootState, ActionTypes> => {
+  const store = createStore(reducers, initialState, enhancers);
+  // @ts-ignore
   epicMiddleware.run(rootEpic);
   return store;
 };

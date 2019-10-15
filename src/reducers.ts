@@ -1,9 +1,16 @@
 import { combineReducers } from 'redux';
-import { post } from './post/reducer';
-import { PostActionTypes } from './post/actions';
+import { postReducer, PostState } from './post/reducer';
+import { toastReducer, ToastState } from './toast/reducer';
 
-export const rootReducer = combineReducers({
-  post,
+export interface RootState {
+  post: PostState;
+  toast: ToastState;
+  action: any;
+}
+
+export const reducers = combineReducers({
+  post: postReducer,
+  toast: toastReducer,
+  // @ts-ignore
+  action: (state = null, action) => action,
 });
-
-export type ActionTypes = PostActionTypes;
