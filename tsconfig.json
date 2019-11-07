@@ -26,5 +26,5 @@
     "strict": true
   },
   "include": ["src/**/*"],
-  "exclude": ["src/**/test.ts"]
+  "exclude": ["src/**/*.spec.ts", "e2e/**/*.e2e-spec.ts"]
 }
