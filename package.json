@@ -22,7 +22,7 @@
     "mongoimport": "eval $(egrep -v '^#' .env.development | xargs) npm explore @pyxismedia/lib-model -- npm run mongoimport"
   },
   "dependencies": {
-    "@pyxismedia/lib-model": "1.0.18",
+    "@pyxismedia/lib-model": "1.0.22",
     "dotenv-flow": "^3.1.0",
     "es6-promise": "^4.2.8",
     "redux": "^4.0.4",

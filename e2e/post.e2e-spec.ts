@@ -7,7 +7,7 @@ import {
   DeletePostModel,
 } from '@pyxismedia/lib-model';
 import postsEnJson from '@pyxismedia/lib-model/build/post/post.en-mock.json';
-import test from 'ava';
+ cc
 import {
   requestPostsAction,
   resetPostAction,
