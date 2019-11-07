@@ -7,7 +7,6 @@ import {
   DeletePostModel,
 } from '@pyxismedia/lib-model';
 import postsEnJson from '@pyxismedia/lib-model/build/post/post.en-mock.json';
- cc
 import {
   requestPostsAction,
   resetPostAction,
