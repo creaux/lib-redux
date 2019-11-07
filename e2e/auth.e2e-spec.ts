@@ -13,10 +13,14 @@ test.serial.cb('should authentificate user', t => {
     const state = store.getState();
     t.log(state.auth);
     // Following props are unique so we don't know exact values
+    // @ts-ignore
     t.truthy(state.auth.id);
+    // @ts-ignore
     t.truthy(state.auth.createdAt);
+    // @ts-ignore
     t.truthy(state.auth.token);
     // We know exact value
+    // @ts-ignore
     t.is(state.auth.userId, AuthSuccessModel.MOCK.userId);
     // To kame sure that schema is not not providing redundant property
     // @ts-ignore
