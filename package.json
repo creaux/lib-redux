@@ -13,6 +13,7 @@
     "commit": "commit",
     "lint": "eslint -c .eslintrc.json './src/**/*.ts'",
     "release": "semantic-release",
+    "pretest:watch": "npm run mongoimport",
     "test": "ava --verbose",
     "test:watch": "ava --watch --verbose",
     "prettier": "prettier --config .prettierrc --write './src/**/*.ts'",

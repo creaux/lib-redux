@@ -1,4 +1,4 @@
-import { CreatePostModel, PostModel, RequestPostsModel } from '@pyxismedia/lib-model';
+import { CreatePostModel, PostModel, RequestPostsModel, DeletePostModel } from '@pyxismedia/lib-model';
 import { createAction } from 'typesafe-actions';
 
 export enum PostActions {
@@ -7,6 +7,7 @@ export enum PostActions {
   CREATE_POST = 'CREATE_POST',
   DELIVER_POST = 'DELIVER_POST',
   RESET_POST = 'RESET_POST',
+  DELETE_POST = 'DELETE_POST',
 }
 
 export const createPostAction = createAction(PostActions.CREATE_POST, action => (post: CreatePostModel) =>
@@ -22,6 +23,10 @@ export const deliverPostsAction = createAction(PostActions.DELIVER_POSTS, action
 );
 
 export const deliverPostAction = createAction(PostActions.DELIVER_POST, action => (payload: PostModel) =>
+  action(payload),
+);
+
+export const deletePostAction = createAction(PostActions.DELETE_POST, action => (payload: DeletePostModel) =>
   action(payload),
 );
 

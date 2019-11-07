@@ -16,6 +16,8 @@ export function toastReducer(state: ToastState = initialState, action: ToastActi
   switch (action.type) {
     case ToastActions.CREATE_TOAST:
       return { ...state, messages: [...state.messages, action.payload] };
+    case ToastActions.RESET_TOAST:
+      return { ...initialState };
     default:
       return { ...state };
   }

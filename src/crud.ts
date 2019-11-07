@@ -1,3 +1,4 @@
+import { Exception } from './exception';
 const { keys } = Object;
 
 class REST {
@@ -15,6 +16,7 @@ interface Params {
 enum CRUD {
   GET = 'GET',
   POST = 'POST',
+  DELETE = 'DELETE',
 }
 
 export class Crud {
@@ -26,9 +28,19 @@ export class Crud {
     this.rest.append('Content-Type', 'application/json');
   }
 
-  public async fetch<T>(url: RequestInfo, init: RequestInit): Promise<T> {
-    const result = await fetch(url, { ...init, headers: this.rest.headers });
-    return result.json();
+  public async fetch<T>(url: RequestInfo, init: RequestInit, token?: string): Promise<T> {
+    const headers = { ...this.rest.headers };
+    if (token) {
+      // @ts-ignore
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    const requestInit = { ...init, headers };
+    const result = await fetch(url, requestInit);
+    const response = await result.json();
+    if (!result.ok) {
+      throw new Exception(response.error, response.statusCode);
+    }
+    return response;
   }
 
   private static getParamsString(params: Params): string {
@@ -37,15 +49,19 @@ export class Crud {
       .join('&');
   }
 
-  public get<T>(input: string, params?: Params): Promise<T> {
+  public get<T>(input: string, params?: Params, token?: string): Promise<T> {
     let query;
     if (params) {
       query = Crud.getParamsString(params);
     }
-    return this.fetch(`${input}${query}`, { method: CRUD.GET });
+    return this.fetch(`${input}${query ? '?' : ''}${query}`, { method: CRUD.GET }, token);
   }
 
-  public post<T>(url: string, body: BodyInit): Promise<T> {
-    return this.fetch(url, { method: CRUD.POST, body });
+  public post<T>(url: string, body: BodyInit, token?: string): Promise<T> {
+    return this.fetch(url, { method: CRUD.POST, body }, token);
+  }
+
+  public delete<T>(url: string, token?: string): Promise<T> {
+    return this.fetch(url, { method: CRUD.DELETE }, token);
   }
 }

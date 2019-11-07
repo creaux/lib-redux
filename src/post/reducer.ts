@@ -27,7 +27,7 @@ function posts(state: PostsState, action: PostActionTypes): PostsState {
     case getType(postActions.requestPostsAction):
       return { ...state, ...action.payload };
     case getType(postActions.deliverPostsAction):
-      return { ...state, collection: action.payload as PostModel[] };
+      return { ...state, collection: action.payload };
     default:
       return { ...state };
   }
