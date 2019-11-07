@@ -26,6 +26,8 @@ export const observableMiddleware = store => next => {
         return subject.asObservable().pipe(
           filter(state => {
             // @ts-ignore
+            console.log('ACTION AS OBSERVABLE', state.action.type);
+            // @ts-ignore
             return actionType === state.action.type;
           }),
         );

@@ -16,6 +16,7 @@
     "pretest:watch": "npm run mongoimport",
     "test": "ava --verbose",
     "test:watch": "ava --watch --verbose",
+    "test:e2e": "ava --verbose --config ava.e2e-config.js",
     "prettier": "prettier --config .prettierrc --write './src/**/*.ts'",
     "prettier:lint": "prettier --config .prettierrc --check './src/**/*.ts'",
     "mongoimport": "eval $(egrep -v '^#' .env.development | xargs) npm explore @pyxismedia/lib-model -- npm run mongoimport"

@@ -127,13 +127,14 @@ test.serial.cb('should create post and deliver it', t => {
     .pipe(
       //@ts-ignore
       switchMap(() => {
+        t.log('SWITCHMAP SWITCHMAP');
         //@ts-ignore
         return store.dispatch(createPostAction(post)).asActionObservable(PostActions.DELIVER_POST);
       }),
     )
     .subscribe(() => {
       const state = store.getState();
-      // t.log('STATE STATE STATE', state);
+      t.log('STATE STATE STATE', state);
       const expected = { ...post };
       if (state.post.post) {
         t.is(state.post.post.title, expected.title);
