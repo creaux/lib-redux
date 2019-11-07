@@ -20,6 +20,7 @@ import { resetToastAction, ToastActions } from '../src/toast/actions';
 import { configureStore } from '../src/store';
 import { Store } from 'redux';
 import { Exception } from '../src/exception';
+import test from 'ava';
 
 let store: Store;
 
