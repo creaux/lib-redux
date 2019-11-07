@@ -23,10 +23,12 @@
   },
   "dependencies": {
     "@pyxismedia/lib-model": "1.0.22",
+    "bcrypt": "^3.0.6",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.10.1",
     "dotenv-flow": "^3.1.0",
     "es6-promise": "^4.2.8",
+    "mongoose": "^5.7.1",
     "redux": "^4.0.4",
     "redux-observable": "^1.1.0",
     "rxjs": "^6.5.3",
