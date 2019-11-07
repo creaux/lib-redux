@@ -2,9 +2,9 @@ import { RootEpic } from '../epics';
 import { filter, switchMap, map, catchError } from 'rxjs/operators';
 import { isActionOf, PayloadAction } from 'typesafe-actions';
 import { requestSignInAction, AuthActions, deliverSignInAction } from './actions';
-import { AuthSignInModel } from '../../../lib-model/src/auth/auth-signin.model';
+import { AuthSignInModel } from '@pyxismedia/lib-model';
 import { API_AUTH } from '../constants';
-import { AuthSuccessModel } from '../../../lib-model/src/auth/auth-success.model';
+import { AuthSuccessModel } from '@pyxismedia/lib-model';
 import { createToast } from '../toast/actions';
 import { of } from 'rxjs';
 

@@ -16,8 +16,8 @@ import {
 import { createToast, Toast } from '../toast/actions';
 import { of } from 'rxjs';
 import { RootEpic } from '../epics';
-import { RequestPostsModel } from '../../../lib-model/src/post/request-posts.model';
-import { DeletePostModel } from '../../../lib-model/src/post/delete-post.model';
+import { RequestPostsModel } from '@pyxismedia/lib-model';
+import { DeletePostModel } from '@pyxismedia/lib-model';
 import { RootState } from '../reducers';
 
 export const requestPostsEpic: RootEpic = (action$, _$, { crud }) =>
