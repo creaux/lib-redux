@@ -1,6 +1,6 @@
 import * as authActions from './actions';
 import { getType, ActionType } from 'typesafe-actions';
-import { AuthSuccessModel } from '../../../lib-model/src/auth/auth-success.model';
+import { AuthSuccessModel } from '@pyxismedia/lib-model';
 
 export type AuthActionTypes = ActionType<typeof authActions>;
 
