@@ -23,6 +23,8 @@
   },
   "dependencies": {
     "@pyxismedia/lib-model": "1.0.22",
+    "class-transformer": "^0.2.0",
+    "class-validator": "^0.10.1",
     "dotenv-flow": "^3.1.0",
     "es6-promise": "^4.2.8",
     "redux": "^4.0.4",
