@@ -1,7 +1,9 @@
 import { createEpicMiddleware } from 'redux-observable';
 import { Crud } from './crud';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { AnyAction } from 'redux';
+import { RootState } from './reducers';
 
 export interface Dependencies {
   crud: Crud;
@@ -13,24 +15,14 @@ export const epicMiddleware = createEpicMiddleware({
 
 //@ts-ignore
 export const observableMiddleware = store => next => {
-  const subject = new BehaviorSubject(undefined);
-  //@ts-ignore
-  return action => {
+  const subject = new Subject<RootState>();
+  return (action: AnyAction) => {
     // Redux is synchronous so this must be just before subject.next method call
     next(action);
     subject.next(store.getState());
     return {
-      // @ts-ignore
-      asActionObservable(actionType) {
-        // @ts-ignore
-        return subject.asObservable().pipe(
-          filter(state => {
-            // @ts-ignore
-            console.log('ACTION AS OBSERVABLE', state.action.type);
-            // @ts-ignore
-            return actionType === state.action.type;
-          }),
-        );
+      asActionObservable(actionType: string) {
+        return subject.asObservable().pipe(filter(state => actionType === state.action.type));
       },
     };
   };

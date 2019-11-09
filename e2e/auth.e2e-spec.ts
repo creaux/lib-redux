@@ -11,7 +11,6 @@ test.serial.cb('should authentificate user', t => {
   store.dispatch(requestSignInAction(new AuthSignInModel({ email: 'karel@vomacka.cz', password: '12345' })));
   const unsubscribe = store.subscribe(() => {
     const state = store.getState();
-    t.log(state.auth);
     // Following props are unique so we don't know exact values
     // @ts-ignore
     t.truthy(state.auth.id);

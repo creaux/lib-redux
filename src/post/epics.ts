@@ -55,7 +55,6 @@ export const deletePostEpic: RootEpic = (action$, state$, { crud }) =>
     withLatestFrom(state$),
     switchMap<[PayloadAction<PostActions.DELETE_POST, DeletePostModel>, RootState], Promise<null>>(
       ([{ payload }, state]): Promise<null> => {
-        console.log('payload', payload);
         return crud.delete(`${API_POST}/${payload.id}`, state.auth.token);
       },
     ),
