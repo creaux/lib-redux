@@ -62,6 +62,7 @@ export const deletePostEpic: RootEpic = (action$, state$, { crud }) =>
       return createToast(new Toast('Post has been successfully deleted.', 201));
     }),
     catchError(error => {
-      return of(createToast(error));
+      console.log('errors validation', error);
+      return of(createToast(new Toast(error, 400)));
     }),
   );

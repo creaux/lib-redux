@@ -38,7 +38,7 @@ export class Crud {
     const result = await fetch(url, requestInit);
     const response = await result.json();
     if (!result.ok) {
-      throw new Exception(response.error, response.statusCode);
+      throw new Exception(response);
     }
     return response;
   }

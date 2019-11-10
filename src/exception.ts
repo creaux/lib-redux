@@ -1,5 +1,5 @@
 export class Exception extends Error {
-  public constructor(public readonly message: string, public readonly code: number) {
-    super(message);
+  public constructor(public readonly response: Response | string) {
+    super(JSON.stringify(response));
   }
 }

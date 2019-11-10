@@ -96,7 +96,7 @@ test.serial.cb('should respond with error for unaunthentificated user', t => {
     const state = store.getState();
     if (state.toast) {
       t.deepEqual(state.action.type, 'CREATE_TOAST');
-      t.deepEqual(state.toast, { messages: [new Exception('Unauthorized', 401)] });
+      t.deepEqual(state.toast, { messages: [new Exception('Unauthorized')] });
       t.end();
     } else {
       t.fail('Toast in store does not exist.');
@@ -148,7 +148,9 @@ test.serial.cb('should create post and deliver it', t => {
           .dispatch(deletePostAction(new DeletePostModel(state.post.post.id)))
           //@ts-ignore
           .asActionObservable(ToastActions.CREATE_TOAST)
-          .subscribe(() => {
+          .subscribe((data: Response) => {
+            // @ts-ignore
+            t.log('DELETE ! ', data.toast.messages);
             t.end();
           });
       }

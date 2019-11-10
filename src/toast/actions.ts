@@ -6,7 +6,7 @@ export enum ToastActions {
 }
 
 export class Toast {
-  public constructor(public readonly message: string, public readonly code: number) {}
+  public constructor(public readonly message: string | object, public readonly code: number) {}
 }
 
 export const createToast = createAction(ToastActions.CREATE_TOAST, action => (toast: Toast) => action(toast));
