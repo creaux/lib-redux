@@ -1,6 +1,6 @@
 import * as authActions from './actions';
 import { getType, ActionType } from 'typesafe-actions';
-import { AuthSuccessModel } from '@pyxismedia/lib-model';
+import { AuthSuccessModel, LocationEnum, LanguageEnum, L10nModel } from '@pyxismedia/lib-model';
 
 export type AuthActionTypes = ActionType<typeof authActions>;
 
@@ -8,8 +8,25 @@ export interface AuthState extends AuthSuccessModel {}
 
 export const initialState = {
   id: '',
-  userId: '',
+  user: {
+    id: '5dc84787046b05067ec1adc5',
+    forname: 'Frantisek',
+    surname: 'Votrapa',
+    email: 'frantisek@votrapa.cz',
+    password: '12345',
+    roles: [
+      {
+        id: '5dc84787046b05067ec1adc5',
+        name: 'Executive',
+      },
+    ],
+    l10n: new L10nModel({
+      language: LanguageEnum.EN,
+      location: LocationEnum.US,
+    }),
+  },
   token: '',
+  createdAt: ''
 };
 
 export function authReducer(state: AuthState = initialState, action: AuthActionTypes): AuthState {

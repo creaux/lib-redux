@@ -14,16 +14,16 @@
     "lint": "eslint -c .eslintrc.json './src/**/*.ts'",
     "release": "semantic-release",
     "pretest:watch": "npm run mongoimport",
-    "test": "ava --verbose",
-    "test:watch": "ava --watch --verbose",
-    "test:e2e": "ava --verbose --config ava.e2e-config.js",
-    "test:e2e:watch": "ava --verbose --watch --config ava.e2e-config.js",
+    "test:e2e": "NODE_ENV=test jest --config e2e/jest.development.e2e.js",
+    "test:e2e:watch": "NODE_ENV=test jest --watch --config e2e/jest.development.e2e.js",
     "prettier": "prettier --config .prettierrc --write './src/**/*.ts'",
     "prettier:lint": "prettier --config .prettierrc --check './src/**/*.ts'",
     "mongoimport": "eval $(egrep -v '^#' .env.development | xargs) npm explore @pyxismedia/lib-model -- npm run mongoimport"
   },
+  "optionalDependencies": {
+    "@pyxismedia/lib-model": "1.0.33"
+  },
   "dependencies": {
-    "@pyxismedia/lib-model": "1.0.22",
     "bcrypt": "^3.0.6",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.10.1",
@@ -47,14 +47,15 @@
     "@commitlint/prompt-cli": "^8.0.0",
     "@types/dotenv-flow": "^3.0.0",
     "@types/isomorphic-fetch": "^0.0.35",
+    "@types/jest": "^25.1.4",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^2.2.0",
-    "ava": "^2.3.0",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.0",
     "husky": "2.7.0",
+    "jest": "^25.1.0",
     "lint-staged": "8.2.1",
     "lodash": "^4.17.15",
     "prettier": "^1.18.2",
@@ -64,7 +65,9 @@
     "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "semantic-release": "^15.13.17",
+    "ts-jest": "^25.2.1",
     "ts-node": "^8.3.0",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.6.3"
   },
   "engines": {
