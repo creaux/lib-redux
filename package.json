@@ -24,7 +24,7 @@
     "@pyxismedia/lib-model": "1.0.33"
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.10.1",
     "dotenv-flow": "^3.1.0",
